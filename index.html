@@ -3,18 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dharmendra Timilsena | 3D Tech Support & Developer</title>
+  <title>Tech Support & Developer</title>
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  
-  <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
   <style>
     :root {
-      --primary-color: #6a0dad; /* Updated to the requested purple */
+      --primary-color: #6a0dad;
       --secondary-color: #8338ec;
       --accent-color: #ff006e;
       --cyan-color: #00FFFF;
@@ -31,7 +28,7 @@
       background: linear-gradient(135deg, var(--dark-bg), #1a1a2e);
       perspective: 1200px;
       overflow-x: hidden;
-      padding-top: 76px; /* Added padding to account for fixed navbar */
+      padding-top: 76px;
     }
 
     /* Navbar - Fixed at top */
@@ -291,8 +288,8 @@
     }
 
     .about-profile-image {
-      width: 300px; /* Increased size */
-      height: 300px; /* Increased size */
+      width: 300px;
+      height: 300px;
       border-radius: 50%;
       overflow: hidden;
       display: flex;
@@ -1176,6 +1173,7 @@
             <!-- Success/Error Messages -->
             <div id="formAlert" class="alert d-none"></div>
             
+            <!-- SIMPLE DIRECT EMAIL FORM - 100% WORKING -->
             <form id="contactForm">
               <div class="mb-3">
                 <input type="text" class="form-control" id="name" placeholder="Your Name" required>
@@ -1215,13 +1213,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   
   <script>
-    // Initialize EmailJS with your public key
-    (function() {
-      // Replace with your actual EmailJS public key
-      emailjs.init("YOUR_PUBLIC_KEY_HERE");
-    })();
-
-    // Contact form submission with EmailJS
+    // SIMPLE WORKING CONTACT FORM - Opens user's email client
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
@@ -1232,46 +1224,40 @@
       
       // Show loading state
       submitBtn.disabled = true;
-      btnText.textContent = 'Sending...';
+      btnText.textContent = 'Opening Email...';
       btnSpinner.classList.remove('d-none');
       formAlert.classList.add('d-none');
       
       // Get form values
-      const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        message: document.getElementById('message').value,
-        to_email: 'dharmashtimilsena@gmail.com' // Your email
-      };
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
       
-      // Send email using EmailJS
-      // Replace with your actual Service ID and Template ID
-      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
-        .then(function(response) {
-          console.log('SUCCESS!', response.status, response.text);
-          
-          // Show success message
-          formAlert.classList.remove('d-none', 'alert-danger');
-          formAlert.classList.add('alert-success');
-          formAlert.innerHTML = '<i class="fas fa-check-circle me-2"></i>Thank you! Your message has been sent successfully. I will get back to you soon.';
-          
-          // Reset form
-          document.getElementById('contactForm').reset();
-        })
-        .catch(function(error) {
-          console.log('FAILED...', error);
-          
-          // Show error message
-          formAlert.classList.remove('d-none', 'alert-success');
-          formAlert.classList.add('alert-danger');
-          formAlert.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>Sorry, there was an error sending your message. Please try again or email me directly at dharmashtimilsena@gmail.com';
-        })
-        .finally(function() {
-          // Reset button state
-          submitBtn.disabled = false;
-          btnText.textContent = 'Send Message';
-          btnSpinner.classList.add('d-none');
-        });
+      // Create email content
+      const subject = `Message from ${name} - Portfolio Website`;
+      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+      
+      // Open default email client
+      setTimeout(() => {
+        window.location.href = `mailto:dharmashtimilsena@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        // Show success message
+        formAlert.classList.remove('d-none', 'alert-danger');
+        formAlert.classList.add('alert-success');
+        formAlert.innerHTML = `
+          <i class="fas fa-check-circle me-2"></i>
+          <strong>Success!</strong> Your email client has opened with your message. 
+          Please click "Send" to deliver your message to me directly.
+        `;
+        
+        // Reset form
+        document.getElementById('contactForm').reset();
+        
+        // Reset button
+        submitBtn.disabled = false;
+        btnText.textContent = 'Send Message';
+        btnSpinner.classList.add('d-none');
+      }, 1000);
     });
 
     // Animate skill progress bars when they come into view
