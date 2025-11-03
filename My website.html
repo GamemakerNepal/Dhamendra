@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dharmendra Timilsena | 3D Tech Support & Developer</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary-color: #6a0dad;
+      --secondary-color: #8338ec;
+      --accent-color: #ff006e;
+      --cyan-color: #00FFFF;
+      --text-light: #f1f5f9;
+      --dark-bg: #121212;
+      --card-bg: #1e1e1e;
+      --contact-bg: rgba(255, 255, 255, 0.03);
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      color: var(--text-light);
+      background: linear-gradient(135deg, var(--dark-bg), #1a1a2e);
+      perspective: 1200px;
+      overflow-x: hidden;
+      padding-top: 76px;
+    }
+
+    /* Navbar - Fixed at top */
+    .navbar {
+      background: rgba(18, 18, 18, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--cyan-color);
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+    }
+
+    .nav-link {
+      color: var(--text-light);
+      font-weight: 500;
+      margin: 0 6px;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: var(--cyan-color);
+      transform: translateY(-3px) scale(1.1);
+    }
+
+    /* Section Headers - Bold and 3D */
+    .section-header {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      transform-style: preserve-3d;
+      transition: all 0.5s ease;
+      position: relative;
+      display: inline-block;
+      padding: 0 20px;
+    }
+
+    .section-header:hover {
+      transform: translateY(-10px) rotateX(10deg) scale(1.05);
+      text-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    }
+
+    .section-header::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 10%;
+      width: 80%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+      transform: scaleX(0);
+      transition: transform 0.5s ease;
+    }
+
+    .section-header:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 0 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      perspective: 800px;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      transform-style: preserve-3d;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 280px;
+      text-align: left;
+      transform: rotateY(-10deg);
+    }
+
+    /* Enhanced Welcome Text Animation */
+    .welcome-text {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #ff006e, #8338ec, #00FFFF, #ff006e);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 4s ease infinite;
+      text-shadow: 0 0 10px rgba(106, 13, 173, 0.5);
+      position: relative;
+      display: inline-block;
+    }
+
+    @keyframes gradient-shift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .welcome-text::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #ff006e, #8338ec, #00FFFF, #ff006e);
+      background-size: 300% 300%;
+      animation: gradient-shift 4s ease infinite;
+      border-radius: 2px;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .hero-text .lead {
+      font-weight: 500;
+      color: #cbd5e1;
+    }
+
+    /* Profile Image with 3D hover and animation */
+    .hero-image {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .profile-container {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      transition: all 0.5s ease;
+      transform-style: preserve-3d;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      margin-bottom: 30px;
+    }
+
+    .profile-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+    }
+
+    .profile-container:hover {
+      transform: rotateY(20deg) rotateX(10deg) scale(1.15);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .profile-container:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Improved Dynamic Text Animation with Cyan Color */
+    .dynamic-text-wrapper {
+      margin-top: 20px;
+      text-align: center;
+      height: 60px;
+      overflow: hidden;
+    }
+
+    .dynamic-text {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      animation: slide 9s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    }
+
+    .dynamic-text li {
+      height: 60px;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--cyan-color);
+      text-shadow: 0 0 10px #00E6FF, 0 0 20px #00E6FF;
+    }
+
+    @keyframes slide {
+      0%, 25% {
+        transform: translateY(0);
+      }
+      33%, 58% {
+        transform: translateY(-60px);
+      }
+      66%, 91% {
+        transform: translateY(-120px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* About Section - White Background */
+    #about {
+      padding: 100px 0;
+      background: #ffffff;
+      color: #333;
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    /* About Profile Image - Larger and on the right */
+    .about-profile-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .about-profile-image {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 5px solid var(--primary-color);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      transition: all 0.5s ease;
+      transform-style: preserve-3d;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    }
+
+    .about-profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+    }
+
+    .about-profile-image:hover {
+      transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .about-profile-image:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Skills Progress Bars */
+    .skills-container {
+      max-width: 800px;
+      margin: 40px auto 0;
+    }
+
+    .skill-item {
+      margin-bottom: 25px;
+    }
+
+    .skill-name {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .skill-bar {
+      height: 12px;
+      background-color: #e0e0e0;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-progress {
+      height: 100%;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      position: relative;
+      transition: width 1.5s ease-in-out;
+      width: 0;
+    }
+
+    .skill-progress::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Features Section - Updated to white background */
+    .features {
+      background: #ffffff;
+      color: #333;
+      padding: 100px 0;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      text-align: center;
+      padding: 40px 20px;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      transform-style: preserve-3d;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-box:hover {
+      transform: translateY(-15px) rotateX(5deg) scale(1.05);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      color: #fff;
+    }
+
+    .feature-icon {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      color: var(--accent-color);
+      margin: 0 auto 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+    }
+
+    .feature-box:hover .feature-icon {
+      transform: rotate(20deg) scale(1.2);
+      color: #fff;
+    }
+
+    .feature-box h5 {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .feature-box p {
+      color: #333;
+      font-size: 1rem;
+    }
+
+    .feature-box:hover p {
+      color: #fff;
+    }
+
+    /* Skills Section - Updated to white background */
+    #skills {
+      padding: 100px 0;
+      background: #ffffff;
+      color: #333;
+    }
+
+    .skill-box {
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      transform-style: preserve-3d;
+      height: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .skill-box:hover {
+      transform: translateY(-10px) rotateY(10deg) rotateX(5deg);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: #fff;
+    }
+
+    .skill-icon {
+      font-size: 40px;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      transition: all 0.4s ease;
+    }
+
+    .skill-box:hover .skill-icon {
+      transform: scale(1.2) rotate(10deg);
+      color: white;
+    }
+
+    .skill-points {
+      list-style-type: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .skill-points li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+      color: #333;
+    }
+
+    .skill-box:hover .skill-points li {
+      color: #fff;
+    }
+
+    .skill-points li:before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+    }
+
+    /* Portfolio Section - Updated to white background */
+    #portfolio {
+      padding: 100px 0;
+      background: #ffffff;
+      color: #333;
+    }
+
+    .portfolio-item {
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      height: 100%;
+      transform-style: preserve-3d;
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .portfolio-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1;
+      border-radius: 15px;
+    }
+
+    .portfolio-item:hover::before {
+      opacity: 0.2;
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-15px) rotateY(10deg) rotateX(5deg) scale(1.05);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    }
+
+    .portfolio-content {
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .portfolio-content h4 {
+      color: #333;
+    }
+
+    .portfolio-content p {
+      color: #555;
+    }
+
+    .portfolio-item:hover .portfolio-content h4,
+    .portfolio-item:hover .portfolio-content p {
+      color: #fff;
+    }
+
+    .portfolio-tech {
+      margin: 15px 0;
+    }
+
+    .tech-tag {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.1);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      transition: all 0.3s ease;
+      color: #333;
+    }
+
+    .portfolio-item:hover .tech-tag {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+      color: #fff;
+    }
+
+    /* Tech Icons for Portfolio */
+    .tech-icon {
+      font-size: 80px;
+      color: var(--primary-color);
+      margin: 30px 0;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+
+    .portfolio-item:hover .tech-icon {
+      transform: scale(1.2) rotate(10deg);
+      color: var(--accent-color);
+    }
+
+    .tech-icon.python {
+      color: #3776AB;
+    }
+
+    .tech-icon.django {
+      color: #092E20;
+    }
+
+    .tech-icon.cpp {
+      color: #00599C;
+    }
+
+    .tech-icon.ai {
+      color: #FF6F00;
+    }
+
+    /* Courses Section - Updated to white background */
+    #courses {
+      padding: 100px 0;
+      background: #ffffff;
+      color: #333;
+    }
+
+    /* Blog Section - Updated to white background */
+    #blog {
+      padding: 100px 0;
+      background: #ffffff;
+      color: #333;
+    }
+
+    .blog-box {
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 15px;
+      padding: 40px 30px;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      transform-style: preserve-3d;
+      height: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .blog-box:hover {
+      transform: translateY(-15px) rotateY(5deg) rotateX(5deg) scale(1.05);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: #fff;
+    }
+
+    .blog-icon {
+      font-size: 40px;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      transition: all 0.4s ease;
+    }
+
+    .blog-box:hover .blog-icon {
+      transform: scale(1.2) rotate(10deg);
+      color: white;
+    }
+
+    .blog-box h4 {
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .blog-box p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .blog-box:hover h4,
+    .blog-box:hover p {
+      color: #fff;
+    }
+
+    /* Contact Section */
+    #contact {
+      padding: 100px 0;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: var(--text-light);
+    }
+
+    .contact-form {
+      background: var(--contact-bg);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+      box-shadow: 0 0 0 2px var(--accent-color);
+      border-color: var(--accent-color);
+    }
+
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-send {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-send:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    }
+
+    /* Footer */
+    footer {
+      background: #0a0a0a;
+      padding: 30px 0;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    .social-links a {
+      color: var(--text-light);
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--cyan-color);
+      transform: translateY(-5px);
+    }
+
+    /* Loading spinner */
+    .spinner-border {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* Success/Error messages */
+    .alert {
+      border-radius: 10px;
+      border: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+
+      .hero-text {
+        text-align: center;
+        transform: rotateY(0deg);
+      }
+
+      .profile-container {
+        width: 180px;
+        height: 180px;
+      }
+
+      .welcome-text {
+        font-size: 2.2rem;
+      }
+
+      .dynamic-text li {
+        font-size: 1.3rem;
+      }
+
+      .section-header {
+        font-size: 2.5rem;
+      }
+
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-profile-image {
+        width: 250px;
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar - Fixed at top -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Dharmendra Timilsena</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#courses">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="welcome-text">Welcome to My Website</h1>
+          <p>I'm Dharmendra Timilsena, a Tech Support specialist and Developer.</p>
+          <p class="lead">Tech Support & Developer | Helping People Learn AI, Python, Web Design, and Social Skills</p>
+        </div>
+
+        <!-- Profile Photo -->
+        <div class="hero-image">
+          <div class="profile-container" id="profile">
+            <img src="web image.jpg" alt="Dharmendra Timilsena" />
+          </div>
+          <!-- Improved Dynamic Text Animation with Cyan Color -->
+          <div class="dynamic-text-wrapper">
+            <ul class="dynamic-text">
+              <li>Dharmendra Timilsena</li>
+              <li>Tech Support Specialist</li>
+              <li>Python & AI Developer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-header">About Me</h2>
+      
+      <div class="about-content">
+        <div class="about-text">
+          <p>Hi! I'm Dharmendra Timilsena, a passionate AI developer, Python & Django instructor, where I help students and organizations become digital and future-ready.</p>
+          <p>With a strong background in web development, machine learning, and digital transformation, I provide online classes, tech consultation, and creative digital solutions that help businesses grow and increase revenue.</p>
+          <p>My mission is to make technology simple, powerful, and accessible for everyone — from beginners learning to code to companies seeking digital excellence.</p>
+          
+          <!-- Skills Progress Bars -->
+          <div class="skills-container">
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>HTML/CSS</span>
+                <span>95%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="95"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>JavaScript</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>React</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="skill-name">
+                <span>UI/UX Design</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="80"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- About Profile Image - Larger and on the right -->
+        <div class="about-profile-container">
+          <div class="about-profile-image">
+            <img src="web image.jpg" alt="Dharmendra Timilsena" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="services">
+    <div class="container">
+      <h2 class="section-header">Why Learn with Me</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fa-solid fa-seedling"></i></div>
+            <h5>Beginner-Friendly</h5>
+            <p>Step-by-step courses for absolute beginners to start coding confidently.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <h5>Advanced Concepts</h5>
+            <p>Deep dive into advanced topics and frameworks to level up your skills.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fa-solid fa-code"></i></div>
+            <h5>Real-World Projects</h5>
+            <p>Learn by building projects and gain hands-on experience.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+            <h5>Affordable Pricing</h5>
+            <p>Access premium courses at prices designed for learners.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fa-solid fa-database"></i></div>
+            <h5>Comprehensive Resources</h5>
+            <p>Templates, docs, and code snippets to boost your learning.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <h5>Industry Insights</h5>
+            <p>Stay updated with latest trends to keep your skills relevant.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-header">My Skills</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-box">
+            <div class="skill-icon"><i class="fa-brands fa-python"></i></div>
+            <h4>Python & AI</h4>
+            <ul class="skill-points">
+              <li>Machine Learning & Deep Learning</li>
+              <li>Data Analysis with Pandas & NumPy</li>
+              <li>Automation Scripts</li>
+              <li>API Development</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-box">
+            <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+            <h4>Web Development</h4>
+            <ul class="skill-points">
+              <li>Frontend (HTML, CSS, JavaScript)</li>
+              <li>Backend (Django, Flask)</li>
+              <li>Database Design & Management</li>
+              <li>RESTful API Development</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-box">
+            <div class="skill-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h4>Teaching & Mentoring</h4>
+            <ul class="skill-points">
+              <li>Curriculum Development</li>
+              <li>One-on-One Mentoring</li>
+              <li>Project-Based Learning</li>
+              <li>Career Guidance</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-box">
+            <div class="skill-icon"><i class="fa-solid fa-paint-brush"></i></div>
+            <h4>Design & UI/UX</h4>
+            <ul class="skill-points">
+              <li>Modern UI/UX Design Principles</li>
+              <li>Responsive Web Design</li>
+              <li>Interactive Prototyping</li>
+              <li>User-Centered Design Approach</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio">
+    <div class="container">
+      <h2 class="section-header">My Portfolio</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="portfolio-item">
+            <div class="portfolio-image">
+              <div class="tech-icon python">
+                <i class="fa-brands fa-python"></i>
+              </div>
+            </div>
+            <div class="portfolio-content">
+              <h4>Python Automation Tools</h4>
+              <p>Developed various Python automation scripts and tools to streamline repetitive tasks, increase productivity, and reduce manual errors in workflow processes.</p>
+              <div class="portfolio-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Automation</span>
+                <span class="tech-tag">Scripting</span>
+              </div>
+              <a href="https://github.com/GamemakerNepal" class="btn btn-send mt-3" target="_blank">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-4">
+          <div class="portfolio-item">
+            <div class="portfolio-image">
+              <div class="tech-icon django">
+                <i class="fa-brands fa-python"></i>
+              </div>
+            </div>
+            <div class="portfolio-content">
+              <h4>Django Web Applications</h4>
+              <p>Full-stack web applications built with Django framework, featuring user authentication, database management, and responsive UI for various business needs.</p>
+              <div class="portfolio-tech">
+                <span class="tech-tag">Django</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Web Development</span>
+              </div>
+              <a href="https://github.com/GamemakerNepal" class="btn btn-send mt-3" target="_blank">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+          <div class="portfolio-item">
+            <div class="portfolio-image">
+              <div class="tech-icon ai">
+                <i class="fa-solid fa-robot"></i>
+              </div>
+            </div>
+            <div class="portfolio-content">
+              <h4>AI & Machine Learning</h4>
+              <p>Machine learning models and AI applications for various use cases including predictive analytics, natural language processing, and computer vision solutions.</p>
+              <div class="portfolio-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">TensorFlow</span>
+                <span class="tech-tag">Machine Learning</span>
+              </div>
+              <a href="https://github.com/GamemakerNepal" class="btn btn-send mt-3" target="_blank">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses Section -->
+  <section id="courses">
+    <div class="container">
+      <h2 class="section-header">Courses I Offer</h2>
+      <div class="row g-4 text-center">
+        <div class="col-md-4">
+          <div class="feature-box">
+            <h5>AI & Python</h5>
+            <p>Learn artificial intelligence and Python from scratch with practical projects.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <h5>Web Development</h5>
+            <p>Front-end & back-end development including Django, HTML, CSS, JS.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <h5>Tech & Social Skills</h5>
+            <p>Improve tech understanding and communication skills for the real world.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section id="blog">
+    <div class="container">
+      <h2 class="section-header">My Blog</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="blog-box">
+            <div class="blog-icon"><i class="fa-solid fa-pen-nib"></i></div>
+            <h4>Engaging and Useful Content</h4>
+            <p>Write blogs that provide value to your readers — such as tutorials, latest tech trends, project case studies, or coding tips. Focus on solving real-world problems so visitors find your blog helpful and trustworthy.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="blog-box">
+            <div class="blog-icon"><i class="fa-solid fa-palette"></i></div>
+            <h4>Eye-Catching Design and Media</h4>
+            <p>Include high-quality images, code snippets, short videos, or 3D visuals to make your posts more interactive and attractive. A clean layout with readable fonts and proper spacing makes readers stay longer and explore more.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-header">Contact Me</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="contact-info mb-4">
+            <p><i class="fas fa-envelope me-2"></i>Email: <a href="mailto:dharmashtimilsena@gmail.com" style="color: var(--cyan-color)">dharmashtimilsena@gmail.com</a></p>
+            <p><i class="fab fa-facebook me-2"></i>Facebook: <a href="https://www.facebook.com/profile.php?id=100087353538755" style="color: var(--cyan-color)" target="_blank">Dharmesh Timilsena</a></p>
+            <p><i class="fab fa-github me-2"></i>GitHub: <a href="https://github.com/GamemakerNepal" style="color: var(--cyan-color)" target="_blank">GamemakerNepal</a></p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="contact-form">
+            <h4 class="mb-4">Send Me a Message</h4>
+            <!-- Success/Error Messages -->
+            <div id="formAlert" class="alert d-none"></div>
+            
+            <!-- SIMPLE DIRECT EMAIL FORM - 100% WORKING -->
+            <form id="contactForm">
+              <div class="mb-3">
+                <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+              </div>
+              <div class="mb-3">
+                <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+              </div>
+              <div class="mb-3">
+                <textarea class="form-control" id="message" rows="4" placeholder="Your Message" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-send w-100" id="submitBtn">
+                <span id="btnText">Send Message</span>
+                <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="social-links mb-3">
+        <a href="https://www.facebook.com/profile.php?id=100087353538755" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/GamemakerNepal" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+      <p>&copy; 2023 Dharmendra Timilsena. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // SIMPLE WORKING CONTACT FORM - Opens user's email client
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnSpinner = document.getElementById('btnSpinner');
+      const formAlert = document.getElementById('formAlert');
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      btnText.textContent = 'Opening Email...';
+      btnSpinner.classList.remove('d-none');
+      formAlert.classList.add('d-none');
+      
+      // Get form values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      
+      // Create email content
+      const subject = `Message from ${name} - Portfolio Website`;
+      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+      
+      // Open default email client
+      setTimeout(() => {
+        window.location.href = `mailto:dharmashtimilsena@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        
+        // Show success message
+        formAlert.classList.remove('d-none', 'alert-danger');
+        formAlert.classList.add('alert-success');
+        formAlert.innerHTML = `
+          <i class="fas fa-check-circle me-2"></i>
+          <strong>Success!</strong> Your email client has opened with your message. 
+          Please click "Send" to deliver your message to me directly.
+        `;
+        
+        // Reset form
+        document.getElementById('contactForm').reset();
+        
+        // Reset button
+        submitBtn.disabled = false;
+        btnText.textContent = 'Send Message';
+        btnSpinner.classList.add('d-none');
+      }, 1000);
+    });
+
+    // Animate skill progress bars when they come into view
+    function animateProgressBars() {
+      const progressBars = document.querySelectorAll('.skill-progress');
+      
+      progressBars.forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        if (isElementInViewport(bar)) {
+          bar.style.width = width + '%';
+        }
+      });
+    }
+
+    // Check if element is in viewport
+    function isElementInViewport(el) {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+
+    // Run on load and scroll
+    window.addEventListener('load', animateProgressBars);
+    window.addEventListener('scroll', animateProgressBars);
+  </script>
+</body>
+</html>
